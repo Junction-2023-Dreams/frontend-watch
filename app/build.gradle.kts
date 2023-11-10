@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.junction.watchfrontend"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.junction.watchfrontend"
         minSdk = 30
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
         vectorDrawables {
@@ -71,4 +71,19 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // To use ListenableFuture
+    implementation("com.google.guava:guava:31.0.1-android")
+
+    // To use CallbackToFutureAdapter
+    implementation("androidx.concurrent:concurrent-futures:1.1.0")
+
+    // Kotlin
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.0")
+
+    // Connection to phone
+    implementation ("com.google.android.gms:play-services-wearable:18.1.0")
+
+    // Health data
+    implementation("androidx.health:health-services-client:1.1.0-alpha01")
 }
