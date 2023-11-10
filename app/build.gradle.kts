@@ -86,4 +86,8 @@ dependencies {
 
     // Health data
     implementation("androidx.health:health-services-client:1.1.0-alpha01")
+
+    // material 3 library
+    implementation ("androidx.compose.material3:material3:1.1.2")
+
 }

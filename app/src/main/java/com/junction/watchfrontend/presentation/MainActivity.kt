@@ -1,11 +1,6 @@
-/* While this template provides a good starting point for using Wear Compose, you can always
- * take a look at https://github.com/android/wear-os-samples/tree/main/ComposeStarter and
- * https://github.com/android/wear-os-samples/tree/main/ComposeAdvanced to find the most up to date
- * changes to the libraries and their usages.
- */
-
 package com.junction.watchfrontend.presentation
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -23,13 +19,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.R
+import com.junction.watchfrontend.presentation.composables.personDefaultStateEvaluation
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
+    lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
+
         super.onCreate(savedInstanceState)
+
+        sharedPreferences.edit().putBoolean("isPersonsDefaultStateSaved", false).apply()
         setContent {
-            WearApp("Android")
+            Surface(
+                color = MaterialTheme.colors.background,
+            ) {
+
+            if (!sharedPreferences.getBoolean("isPersonsDefaultStateSaved", false)) {
+                personDefaultStateEvaluation(activity = this)
+            } else WearApp("Android")
+
+            }
         }
     }
 }
