@@ -4,10 +4,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -19,8 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.R
-import com.junction.watchfrontend.presentation.composables.personDefaultStateEvaluation
-import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
+import com.junction.watchfrontend.presentation.composables.homeComposable
+import com.junction.watchfrontend.presentation.composables.personDefaultStateEvaluationComposable
 
 class MainActivity : ComponentActivity() {
     lateinit var sharedPreferences: SharedPreferences
@@ -30,35 +26,18 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
-        sharedPreferences.edit().putBoolean("isPersonsDefaultStateSaved", false).apply()
+        // sharedPreferences.edit().putBoolean("isPersonsDefaultStateSaved", false).apply()
         setContent {
             Surface(
                 color = MaterialTheme.colors.background,
             ) {
 
-            if (!sharedPreferences.getBoolean("isPersonsDefaultStateSaved", false)) {
-                personDefaultStateEvaluation(activity = this)
-            } else WearApp("Android")
-
+                if (!sharedPreferences.getBoolean("isPersonsDefaultStateSaved", false)) {
+                    personDefaultStateEvaluationComposable(activity = this)
+                } else {
+                    homeComposable(activity = this)
+                }
             }
-        }
-    }
-}
-
-@Composable
-fun WearApp(greetingName: String) {
-    MyApplicationTheme {
-        /* If you have enough items in your list, use [ScalingLazyColumn] which is an optimized
-         * version of LazyColumn for wear devices with some added features. For more information,
-         * see d.android.com/wear/compose.
-         */
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.background),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Greeting(greetingName = greetingName)
         }
     }
 }
@@ -76,5 +55,5 @@ fun Greeting(greetingName: String) {
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-    WearApp("Preview Android")
+    homeComposable(activity = MainActivity())
 }

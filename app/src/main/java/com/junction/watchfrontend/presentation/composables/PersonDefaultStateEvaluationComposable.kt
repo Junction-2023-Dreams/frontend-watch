@@ -1,5 +1,6 @@
 package com.junction.watchfrontend.presentation.composables
 
+import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +27,7 @@ import com.junction.watchfrontend.R
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 @Composable
-fun personDefaultStateEvaluation(activity: ComponentActivity) {
+fun personDefaultStateEvaluationComposable(activity: ComponentActivity) {
 
     var hasStarted by remember { mutableStateOf(false) }
     var stage by remember { mutableStateOf(0) }
@@ -105,7 +106,7 @@ fun personDefaultStateEvaluation(activity: ComponentActivity) {
                     )
                 } else if (stage == 2) {
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_more_horiz_24),
+                        painter = painterResource(id = R.drawable.baseline_air_24),
                         "Breath out",
                         tint = MaterialTheme.colors.primary,
                     )
@@ -121,7 +122,12 @@ fun personDefaultStateEvaluation(activity: ComponentActivity) {
                         textAlign = TextAlign.Center,
                     )
                     Spacer(modifier = Modifier.height(6.dp))
-                    Button(onClick = { }) {
+                    Button(onClick = {
+                        activity.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit()
+                            .putBoolean("isPersonsDefaultStateSaved", true).apply()
+                        // reload app
+                        activity.recreate()
+                    }) {
                         Text("Finish")
                     }
                 }
