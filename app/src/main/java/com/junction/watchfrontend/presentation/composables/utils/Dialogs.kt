@@ -141,3 +141,62 @@ fun DialogComposable(
         }
     }
 }
+
+@Composable
+fun DialogComposableOneAction(
+    activity: ComponentActivity,
+    alertShowDialog: Boolean = false,
+    onDismiss: () -> Unit,
+    title: String = "Recommended\nPain Solution",
+    description: String = "Breathing",
+) {
+    Dialog(
+        showDialog = alertShowDialog,
+        onDismissRequest = {
+            onDismiss()
+        },
+    ) {
+        Alert(
+            title = {
+                Text(
+                    text = title,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colors.onBackground
+                )
+            },
+            negativeButton = {
+                SpacerComposable(width = 0)
+            },
+            positiveButton = {
+                Row {
+
+                    Button(
+                        onClick = {
+                            onDismiss()
+                        },
+                        colors = ButtonDefaults.primaryButtonColors()
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.baseline_close_24),
+                            contentDescription = "Use alternate solution"
+                        )
+                    }
+                    SpacerComposable(width = 12)
+                }
+            },
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = description,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.body2,
+                    color = MaterialTheme.colors.onBackground
+                )
+                SpacerComposable()
+            }
+        }
+    }
+}

@@ -36,6 +36,7 @@ import androidx.wear.compose.material.dialog.Dialog
 import com.junction.watchfrontend.R
 import com.junction.watchfrontend.presentation.composables.utils.ButtonComposable
 import com.junction.watchfrontend.presentation.composables.utils.DialogComposable
+import com.junction.watchfrontend.presentation.composables.utils.DialogComposableOneAction
 import com.junction.watchfrontend.presentation.composables.utils.DialogConfirmationComposable
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 import com.junction.watchfrontend.presentation.composables.utils.toastNotImplemented
@@ -138,14 +139,12 @@ fun homeComposable(activity: ComponentActivity) {
                             modifier = Modifier.scale(-1f, 1f)
                         )
                     }
-                    DialogComposable(
+                    DialogComposableOneAction(
                         activity,
                         showSosDialog,
-                        onAccept = { showSosDialog = false },
                         onDismiss = { showSosDialog = false },
                         title = "SOS",
                         description = "Notifying your emergency contacts",
-                        icon = { SpacerComposable() }
                     )
 
                     IconButton(colors = IconButtonDefaults.filledIconButtonColors(
