@@ -1,4 +1,4 @@
-package com.junction.watchfrontend.presentation.composables
+package com.junction.watchfrontend.presentation.composables.home
 
 import android.content.Context
 import androidx.activity.ComponentActivity
@@ -25,7 +25,7 @@ import com.junction.watchfrontend.presentation.composables.exercises.breathExerc
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 @Composable
-fun personDefaultStateEvaluationComposable(activity: ComponentActivity) {
+fun FirstMeasurementComposable(activity: ComponentActivity) {
 
     var hasStarted by remember { mutableStateOf(false) }
 

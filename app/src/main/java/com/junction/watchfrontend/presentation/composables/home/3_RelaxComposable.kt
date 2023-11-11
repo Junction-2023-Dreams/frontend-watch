@@ -28,7 +28,7 @@ import com.junction.watchfrontend.presentation.composables.utils.toastNotImpleme
 @Composable
 fun RelaxComposable(activity: ComponentActivity, isDebug: Boolean, startWithBreathingExercise: Boolean = false, onFinish: () -> Unit = {}) {
 
-    var stage by remember { mutableStateOf(if(isDebug) 2 else if(startWithBreathingExercise) 1 else 0) }
+    var stage by remember { mutableStateOf(if(isDebug) 1 else if(startWithBreathingExercise) 1 else 0) }
 
     ColumnComposable {
         if (stage == 0) {
@@ -114,7 +114,7 @@ fun RelaxComposable(activity: ComponentActivity, isDebug: Boolean, startWithBrea
         } else if (stage == 1) {
             breathExerciseComposable(
                 activity,
-                iterations = if(isDebug) 0 else 1,
+                iterations = if(isDebug) 1 else 1,
                 titleFinished = {
                     Text("Success!")
                     Text("Your heart rate is now")

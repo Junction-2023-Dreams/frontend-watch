@@ -1,6 +1,5 @@
 package com.junction.watchfrontend.presentation
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,15 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.R
-import com.junction.watchfrontend.presentation.composables.home.homeComposable
-import com.junction.watchfrontend.presentation.composables.personDefaultStateEvaluationComposable
+import com.junction.watchfrontend.presentation.composables.home.HomeComposable
+import com.junction.watchfrontend.presentation.composables.navigation.NavigationComposable
 
 class MainActivity : ComponentActivity() {
-    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
-
         super.onCreate(savedInstanceState)
 
         // sharedPreferences.edit().putBoolean("isPersonsDefaultStateSaved", false).apply()
@@ -31,12 +27,7 @@ class MainActivity : ComponentActivity() {
             Surface(
                 color = MaterialTheme.colors.background,
             ) {
-
-                if (!sharedPreferences.getBoolean("isPersonsDefaultStateSaved", false)) {
-                    personDefaultStateEvaluationComposable(activity = this)
-                } else {
-                    homeComposable(activity = this)
-                }
+                NavigationComposable(this)
             }
         }
     }
@@ -55,5 +46,5 @@ fun Greeting(greetingName: String) {
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-    homeComposable(activity = MainActivity())
+    HomeComposable(activity = MainActivity())
 }

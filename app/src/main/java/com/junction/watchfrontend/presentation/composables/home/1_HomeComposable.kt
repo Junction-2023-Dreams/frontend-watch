@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -24,15 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.rotationMatrix
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.dialog.Confirmation
-import androidx.wear.compose.material.dialog.Dialog
 import com.junction.watchfrontend.R
 import com.junction.watchfrontend.presentation.composables.utils.ButtonComposable
 import com.junction.watchfrontend.presentation.composables.utils.DialogComposable
@@ -45,16 +38,14 @@ import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun homeComposable(activity: ComponentActivity) {
+fun HomeComposable(activity: ComponentActivity, isDebug: Boolean) {
 
-    // todo psych assesment
-    var isDebug by remember { mutableStateOf(false) };
+    var stage by remember { mutableStateOf(if (isDebug) 2 else 0) }
 
     val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
     var showPillConfirmation by remember { mutableStateOf(false) }
     var showSosDialog by remember { mutableStateOf(false) }
 
-    var stage by remember { mutableStateOf(if (isDebug) 1 else 0) }
 
     MyApplicationTheme {
         Column(

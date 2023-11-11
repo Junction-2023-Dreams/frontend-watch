@@ -90,4 +90,7 @@ dependencies {
     // material 3 library
     implementation ("androidx.compose.material3:material3:1.1.2")
 
+    // navigation of pages
+    implementation("androidx.wear.compose:compose-navigation:1.2.1")
+
 }
