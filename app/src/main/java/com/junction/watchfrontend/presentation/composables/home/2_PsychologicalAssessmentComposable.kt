@@ -27,10 +27,10 @@ import androidx.wear.compose.material.InlineSliderDefaults
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TitleCard
-import androidx.wear.compose.material.ToggleChip
-import com.junction.watchfrontend.presentation.composables.ButtonComposable
-import com.junction.watchfrontend.presentation.composables.ColumnComposable
-import com.junction.watchfrontend.presentation.composables.SpacerComposable
+import com.junction.watchfrontend.R
+import com.junction.watchfrontend.presentation.composables.utils.ButtonComposable
+import com.junction.watchfrontend.presentation.composables.utils.ColumnComposable
+import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 import com.junction.watchfrontend.presentation.theme.Constants
 
 @Composable
@@ -63,7 +63,7 @@ fun PsychologicalAssessmentComposable(activity: ComponentActivity, isDebug: Bool
             ) {
                 Row {
                     Icon(
-                        painter = painterResource(id = com.junction.watchfrontend.R.drawable.baseline_play_arrow_24),
+                        painter = painterResource(id = R.drawable.baseline_play_arrow_24),
                         contentDescription = "Check"
                     )
                     SpacerComposable()
@@ -107,7 +107,7 @@ fun PsychologicalAssessmentComposable(activity: ComponentActivity, isDebug: Bool
             ) {
                 Row {
                     Icon(
-                        painter = painterResource(id = com.junction.watchfrontend.R.drawable.baseline_play_arrow_24),
+                        painter = painterResource(id = R.drawable.baseline_play_arrow_24),
                         contentDescription = "Next"
                     )
                     SpacerComposable()

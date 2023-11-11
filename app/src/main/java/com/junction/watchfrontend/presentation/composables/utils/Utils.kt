@@ -1,5 +1,7 @@
-package com.junction.watchfrontend.presentation.composables
+package com.junction.watchfrontend.presentation.composables.utils
 
+import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,14 +14,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Button
-import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.presentation.theme.Constants
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
+
+fun toastNotImplemented(activity: ComponentActivity) =  Toast.makeText(
+    activity,
+    "Implemented soon",
+    Toast.LENGTH_SHORT,
+).show();
 
 @Composable
 fun ColumnComposable(content: @Composable ColumnScope.() -> Unit) {

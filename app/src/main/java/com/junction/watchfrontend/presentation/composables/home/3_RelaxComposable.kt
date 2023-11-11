@@ -15,22 +15,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TitleCard
-import com.junction.watchfrontend.presentation.MainActivity
-import com.junction.watchfrontend.presentation.composables.ColumnComposable
-import com.junction.watchfrontend.presentation.composables.SpacerComposable
+import com.junction.watchfrontend.presentation.composables.utils.ColumnComposable
+import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 import com.junction.watchfrontend.presentation.composables.exercises.breathExerciseComposable
+import com.junction.watchfrontend.presentation.composables.utils.toastNotImplemented
 
 @Composable
-fun RelaxComposable(activity: ComponentActivity, isDebug: Boolean, onFinish: () -> Unit = {}) {
+fun RelaxComposable(activity: ComponentActivity, isDebug: Boolean, startWithBreathingExercise: Boolean = false, onFinish: () -> Unit = {}) {
 
-    var stage by remember { mutableStateOf(if(isDebug) 2 else 0) }
+    var stage by remember { mutableStateOf(if(isDebug) 2 else if(startWithBreathingExercise) 1 else 0) }
 
     ColumnComposable {
         if (stage == 0) {
@@ -69,15 +67,26 @@ fun RelaxComposable(activity: ComponentActivity, isDebug: Boolean, onFinish: () 
                     TitleCard(
                         modifier = Modifier.width(200.dp),
                         onClick = {
-                            Toast.makeText(
-                                activity,
-                                "Implemented soon",
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                           toastNotImplemented(activity)
                         },
                         title = { Text("Walking") },
                         time = { Text("5 min", color = MaterialTheme.colors.primary) },
                         ) {
+                    }
+                }
+                item {
+                    SpacerComposable()
+                }
+                item {
+
+                    TitleCard(
+                        modifier = Modifier.width(200.dp),
+                        onClick = {
+                            toastNotImplemented(activity)
+                        },
+                        title = { Text("Meditation") },
+                        time = { Text("7 min", color = MaterialTheme.colors.primary) },
+                    ) {
                     }
                 }
                 item {
