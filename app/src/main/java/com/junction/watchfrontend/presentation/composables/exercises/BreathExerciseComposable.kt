@@ -1,4 +1,4 @@
-package com.junction.watchfrontend.presentation.composables
+package com.junction.watchfrontend.presentation.composables.exercises
 
 import android.content.Context
 import android.os.Handler
@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,12 +29,16 @@ import com.junction.watchfrontend.R
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 @Composable
-fun breathExcerciseComposable(activity: ComponentActivity, iterations: Int = 1) {
+fun breathExerciseComposable(
+    activity: ComponentActivity,
+    iterations: Int = 1,
+    titleFinished: @Composable () -> Unit = {Text("Default Body State\nMeasurement\nfinished")},
+    onFinish: () -> Unit = {}
+) {
     var stage by remember { mutableStateOf(0) }
 
-
     fun startSchedule(iterations: Int) {
-        if(iterations <= 0) {
+        if (iterations <= 0) {
             stage = 3
             return;
         }
@@ -98,16 +103,10 @@ fun breathExcerciseComposable(activity: ComponentActivity, iterations: Int = 1) 
                 )
             } else {
 
-                Text(
-                    "Default Body State \nMeasurement\nfinished",
-                    textAlign = TextAlign.Center,
-                )
+                titleFinished()
                 Spacer(modifier = Modifier.height(6.dp))
                 Button(onClick = {
-                    activity.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit()
-                        .putBoolean("isPersonsDefaultStateSaved", true).apply()
-                    // reload app
-                    activity.recreate()
+                    onFinish()
                 }) {
                     Text("Finish")
                 }

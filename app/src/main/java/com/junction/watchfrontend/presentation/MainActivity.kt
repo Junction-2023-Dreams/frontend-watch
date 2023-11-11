@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.R
-import com.junction.watchfrontend.presentation.composables.homeComposable
+import com.junction.watchfrontend.presentation.composables.home.homeComposable
 import com.junction.watchfrontend.presentation.composables.personDefaultStateEvaluationComposable
 
 class MainActivity : ComponentActivity() {

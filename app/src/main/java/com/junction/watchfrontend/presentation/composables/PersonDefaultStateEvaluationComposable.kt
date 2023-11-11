@@ -1,5 +1,6 @@
 package com.junction.watchfrontend.presentation.composables
 
+import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
+import com.junction.watchfrontend.presentation.composables.exercises.breathExerciseComposable
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 @Composable
@@ -57,7 +59,12 @@ fun personDefaultStateEvaluationComposable(activity: ComponentActivity) {
 
 
             } else {
-                breathExcerciseComposable(activity, 1);
+                breathExerciseComposable(activity, 1) {
+                    activity.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit()
+                        .putBoolean("isPersonsDefaultStateSaved", true).apply()
+                    // reload app
+                    activity.recreate()
+                }
             }
         }
 
