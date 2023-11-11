@@ -42,9 +42,3 @@ fun Greeting(greetingName: String) {
         text = stringResource(R.string.hello_world, greetingName)
     )
 }
-
-@Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    HomeComposable(activity = MainActivity())
-}

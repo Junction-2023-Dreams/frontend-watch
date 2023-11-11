@@ -1,5 +1,6 @@
 package com.junction.watchfrontend.presentation.composables.home
 
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,15 +23,14 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.R
-import com.junction.watchfrontend.presentation.composables.utils.ButtonComposable
-import com.junction.watchfrontend.presentation.composables.utils.DialogComposable
+import com.junction.watchfrontend.presentation.composables.navigation.Pages
 import com.junction.watchfrontend.presentation.composables.utils.DialogComposableOneAction
-import com.junction.watchfrontend.presentation.composables.utils.DialogConfirmationComposable
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 import com.junction.watchfrontend.presentation.composables.utils.toastNotImplemented
 import com.junction.watchfrontend.presentation.theme.Constants
@@ -38,14 +38,13 @@ import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeComposable(activity: ComponentActivity, isDebug: Boolean) {
+fun HomeComposable(
+    activity: ComponentActivity,
+    isDebug: Boolean,
+    navController: NavHostController
+) {
 
-    var stage by remember { mutableStateOf(if (isDebug) 2 else 0) }
-
-    val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
-    var showPillConfirmation by remember { mutableStateOf(false) }
     var showSosDialog by remember { mutableStateOf(false) }
-
 
     MyApplicationTheme {
         Column(
@@ -55,101 +54,53 @@ fun HomeComposable(activity: ComponentActivity, isDebug: Boolean) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (stage == 1) {
-                ButtonComposable("Relax", {
-                    Icon(
-                        painter = painterResource(id = R.drawable.outline_self_improvement_24),
-                        contentDescription = "Check"
-                    )
+            SpacerComposable(70)
+            Button(
+                onClick = {
+                    navController.navigate(Pages.Pain.route)
+                    Log.d("WatchDebug", "HomeComposable: PRESSED")
+                },
+                Modifier
+                    .width(100.dp)
+                    .height(Constants.buttonHeight)
+            ) {
+                Text("I have pain")
+            }
+
+            SpacerComposable(32)
+
+            Row {
+
+                IconButton(colors = IconButtonDefaults.filledIconButtonColors(
+                ), onClick = {
+                    toastNotImplemented(activity)
                 }) {
-                    stage = 2
-                }
-
-                SpacerComposable()
-
-                ButtonComposable("Ibuprofen", {
                     Icon(
-                        painter = painterResource(id = R.drawable.pill),
-                        contentDescription = "Check",
-                        modifier = Modifier
-                            .width(20.dp)
-                            .height(20.dp)
+                        painter = painterResource(id = R.drawable.baseline_insert_chart_outlined_24),
+                        contentDescription = "SOS",
+                        modifier = Modifier.scale(-1f, 1f)
                     )
+                }
+                DialogComposableOneAction(
+                    activity,
+                    showSosDialog,
+                    onDismiss = { showSosDialog = false },
+                    title = "SOS",
+                    description = "Notifying your emergency contacts",
+                )
+
+                IconButton(colors = IconButtonDefaults.filledIconButtonColors(
+                    containerColor = Color.Red
+                ), onClick = {
+                    showSosDialog = true
                 }) {
-                    setShowDialog(true)
-                }
-
-                DialogComposable(activity, showDialog, onDismiss = {
-                    android.os.Handler().postDelayed({
-                        showPillConfirmation = true
-                    }, 500)
-                    setShowDialog(false)
-                }, onAccept = {
-                    showPillConfirmation = false
-                    setShowDialog(false)
-                    stage = 3
-                })
-
-                DialogConfirmationComposable(showPillConfirmation, onDismiss = {
-                    stage = 0
-                    showPillConfirmation = false
-                })
-            } else if (stage == 2) {
-                RelaxComposable(activity, isDebug) {
-                    stage = 0;
-                }
-            } else if(stage == 3) {
-                /* Breathing instead of painkiller */
-                RelaxComposable(activity, isDebug, true) {
-                    stage = 0
-                }
-            } else {
-                SpacerComposable(70)
-                Button(
-                    onClick = {
-                        stage = 1;
-                    },
-                    Modifier
-                        .width(100.dp)
-                        .height(Constants.buttonHeight)
-                ) {
-                    Text("I have pain")
-                }
-
-                SpacerComposable(32)
-
-                Row {
-
-                    IconButton(colors = IconButtonDefaults.filledIconButtonColors(
-                    ), onClick = {
-                        toastNotImplemented(activity)
-                    }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_insert_chart_outlined_24),
-                            contentDescription = "SOS",
-                            modifier = Modifier.scale(-1f, 1f)
-                        )
-                    }
-                    DialogComposableOneAction(
-                        activity,
-                        showSosDialog,
-                        onDismiss = { showSosDialog = false },
-                        title = "SOS",
-                        description = "Notifying your emergency contacts",
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_sos_24),
+                        contentDescription = "SOS"
                     )
-
-                    IconButton(colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = Color.Red
-                    ), onClick = {
-                        showSosDialog = true
-                    }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_sos_24),
-                            contentDescription = "SOS"
-                        )
-                    }
                 }
             }
+
         }
 
     }

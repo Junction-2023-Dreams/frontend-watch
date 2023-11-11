@@ -1,4 +1,4 @@
-package com.junction.watchfrontend.presentation.composables.home
+package com.junction.watchfrontend.presentation.composables.home.assessment
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement

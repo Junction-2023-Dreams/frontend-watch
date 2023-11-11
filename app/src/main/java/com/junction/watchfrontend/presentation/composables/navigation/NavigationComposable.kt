@@ -12,6 +12,8 @@ import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
 import com.junction.watchfrontend.presentation.composables.home.FirstMeasurementComposable
 import com.junction.watchfrontend.presentation.composables.home.HomeComposable
+import com.junction.watchfrontend.presentation.composables.home.PainComposable
+import com.junction.watchfrontend.presentation.composables.home.RelaxComposable
 
 @Composable
 fun NavigationComposable(activity: ComponentActivity) {
@@ -27,16 +29,27 @@ fun NavigationComposable(activity: ComponentActivity) {
 
     SwipeDismissableNavHost(
         navController = navController,
-        startDestination = startDestination
-    ) {
+        startDestination = startDestination,
+
+        ) {
         composable(Pages.FirstMeasurement.route) {
             FirstMeasurementComposable(activity);
         }
         composable(Pages.Home.route) {
-            HomeComposable(activity, isDebug);
+            HomeComposable(activity, isDebug, navController);
         }
         composable(Pages.Pain.route) {
-            HomeComposable(activity, isDebug);
+            PainComposable(activity, isDebug, navController)
+        }
+        composable(Pages.Relax.route) {
+            RelaxComposable(activity, isDebug, false) {
+                navController.navigateUp()
+            }
+        }
+        composable(Pages.RelaxBreathing.route) {
+            RelaxComposable(activity, isDebug, true) {
+                navController.navigateUp()
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ import androidx.wear.compose.material.TitleCard
 import com.junction.watchfrontend.presentation.composables.utils.ColumnComposable
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 import com.junction.watchfrontend.presentation.composables.exercises.breathExerciseComposable
+import com.junction.watchfrontend.presentation.composables.home.assessment.PsychologicalAssessmentComposable
 import com.junction.watchfrontend.presentation.composables.utils.toastNotImplemented
 
 @Composable

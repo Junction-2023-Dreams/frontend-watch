@@ -9,4 +9,6 @@ sealed class Pages(
     object FirstMeasurement : Pages("first_measurement")
     object Home : Pages("home")
     object Pain : Pages("pain")
+    object Relax : Pages("relax")
+    object RelaxBreathing : Pages("relax_breathing")
 }
