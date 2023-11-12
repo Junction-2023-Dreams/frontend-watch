@@ -4,11 +4,17 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -22,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.wear.compose.material.Button
@@ -33,7 +40,7 @@ import com.junction.watchfrontend.presentation.composables.navigation.Pages
 import com.junction.watchfrontend.presentation.composables.utils.DialogComposableOneAction
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 import com.junction.watchfrontend.presentation.composables.utils.toastNotImplemented
-import com.junction.watchfrontend.presentation.theme.Constants
+import com.junction.watchfrontend.presentation.composables.utils.Constants
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,11 +80,11 @@ fun HomeComposable(
 
                 IconButton(colors = IconButtonDefaults.filledIconButtonColors(
                 ), onClick = {
-                    toastNotImplemented(activity)
+                    navController.navigate(Pages.Chart.route)
                 }) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_insert_chart_outlined_24),
-                        contentDescription = "SOS",
+                        contentDescription = "Analytics",
                         modifier = Modifier.scale(-1f, 1f)
                     )
                 }
@@ -88,6 +95,7 @@ fun HomeComposable(
                     title = "SOS",
                     description = "Notifying your emergency contacts",
                 )
+
 
                 IconButton(colors = IconButtonDefaults.filledIconButtonColors(
                     containerColor = Color.Red

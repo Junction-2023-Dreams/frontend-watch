@@ -1,6 +1,7 @@
 package com.junction.watchfrontend.presentation.composables.home.relax
 
 import android.os.Handler
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,7 +32,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun BreathExerciseComposable(
     activity: ComponentActivity,
-    iterations: Int = 1,
+    iterationCount: Int = 1,
     titleFinished: @Composable () -> Unit = {
         Text(
             "Default Body State\nMeasurement\nfinished",
@@ -58,8 +59,10 @@ fun BreathExerciseComposable(
     }
 
     var hasHandlerStarted by remember { mutableStateOf(false) };
+    var iterations by remember { mutableStateOf(iterationCount) };
 
-    fun startSchedule(iterations: Int) {
+    fun startSchedule() {
+        Log.d("Watch Debug", "startSchedule: $iterations")
         if (iterations <= 0) {
             stage = 3
             return;
@@ -79,7 +82,8 @@ fun BreathExerciseComposable(
                         countDownProgress()
                         Handler().postDelayed({
                             hasHandlerStarted = false;
-                            startSchedule(iterations - 1);
+                            iterations -= 1;
+                            startSchedule()
                         }, delayMillis)
                     }, delayMillis)
                 }, delayMillis)
@@ -87,8 +91,7 @@ fun BreathExerciseComposable(
         }
     }
 
-
-    startSchedule(iterations);
+    startSchedule()
     MyApplicationTheme {
         Box(modifier = Modifier.fillMaxSize()) {
             CircularProgressIndicator(

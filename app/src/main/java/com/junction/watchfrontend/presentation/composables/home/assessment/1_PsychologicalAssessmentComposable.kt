@@ -16,7 +16,7 @@ import com.junction.watchfrontend.R
 import com.junction.watchfrontend.presentation.composables.navigation.Pages
 import com.junction.watchfrontend.presentation.composables.utils.ColumnComposable
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
-import com.junction.watchfrontend.presentation.theme.Constants
+import com.junction.watchfrontend.presentation.composables.utils.Constants
 
 @Composable
 fun PsychologicalAssessmentComposable(

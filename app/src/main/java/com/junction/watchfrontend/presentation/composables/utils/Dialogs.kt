@@ -2,11 +2,15 @@ package com.junction.watchfrontend.presentation.composables.utils
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -156,6 +160,7 @@ fun DialogComposableOneAction(
             onDismiss()
         },
     ) {
+
         Alert(
             title = {
                 Text(
@@ -197,6 +202,28 @@ fun DialogComposableOneAction(
                 )
                 SpacerComposable()
             }
+        }
+    }
+}
+
+
+@Composable
+fun PulseComposable(component: @Composable ColumnScope.() -> Unit = {}) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        CircularProgressIndicator(
+            progress = 100f,
+            modifier = Modifier
+                .fillMaxSize(),
+            strokeWidth = 3.dp,
+            color = MaterialTheme.colors.primary,
+        )
+
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            component()
         }
     }
 }

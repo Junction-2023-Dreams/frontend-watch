@@ -93,4 +93,8 @@ dependencies {
     // navigation of pages
     implementation("androidx.wear.compose:compose-navigation:1.2.1")
 
+    // chart library
+    implementation("com.patrykandpatryk.vico:compose:1.12.0")
+
+
 }

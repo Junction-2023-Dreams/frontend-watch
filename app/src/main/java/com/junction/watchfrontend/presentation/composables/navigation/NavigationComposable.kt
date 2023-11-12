@@ -12,6 +12,7 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
+import com.junction.watchfrontend.presentation.composables.home.ChartComposable
 import com.junction.watchfrontend.presentation.composables.home.FirstMeasurementComposable
 import com.junction.watchfrontend.presentation.composables.home.HomeComposable
 import com.junction.watchfrontend.presentation.composables.home.PainComposable
@@ -35,7 +36,7 @@ fun NavigationComposable(activity: ComponentActivity) {
 
     SwipeDismissableNavHost(
         navController = navController,
-        startDestination = if(!isDebug) startDestination else Pages.ExerciseBreath.route,
+        startDestination = if(!isDebug) startDestination else Pages.Chart.route,
 
         ) {
         composable(Pages.FirstMeasurement.route) {
@@ -56,7 +57,7 @@ fun NavigationComposable(activity: ComponentActivity) {
         composable(Pages.ExerciseBreath.route) {
             BreathExerciseComposable(
                 activity,
-                iterations = 1,
+                iterationCount = 1,
                 titleFinished = {
                     Text("Success!")
                     Text("Your heart rate is now")
@@ -82,6 +83,9 @@ fun NavigationComposable(activity: ComponentActivity) {
         }
         composable(Pages.AssessmentPainQuestionaire.route) {
             PainQuestionaireComposable(navController)
+        }
+        composable(Pages.Chart.route) {
+            ChartComposable()
         }
     }
 }

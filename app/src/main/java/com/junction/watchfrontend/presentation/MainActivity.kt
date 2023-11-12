@@ -16,6 +16,7 @@ import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.R
 import com.junction.watchfrontend.presentation.composables.home.HomeComposable
 import com.junction.watchfrontend.presentation.composables.navigation.NavigationComposable
+import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -24,21 +25,9 @@ class MainActivity : ComponentActivity() {
 
         // sharedPreferences.edit().putBoolean("isPersonsDefaultStateSaved", false).apply()
         setContent {
-            Surface(
-                color = MaterialTheme.colors.background,
-            ) {
+            MyApplicationTheme {
                 NavigationComposable(this)
             }
         }
     }
-}
-
-@Composable
-fun Greeting(greetingName: String) {
-    Text(
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center,
-        color = MaterialTheme.colors.primary,
-        text = stringResource(R.string.hello_world, greetingName)
-    )
 }

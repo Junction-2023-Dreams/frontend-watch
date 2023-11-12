@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import com.junction.watchfrontend.presentation.theme.Constants
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 fun toastNotImplemented(activity: ComponentActivity) =  Toast.makeText(
