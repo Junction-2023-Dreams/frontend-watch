@@ -19,13 +19,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
-import com.junction.watchfrontend.presentation.composables.exercises.breathExerciseComposable
+import com.junction.watchfrontend.presentation.composables.home.relax.BreathExerciseComposable
+import com.junction.watchfrontend.presentation.composables.navigation.Pages
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 
 @Composable
-fun FirstMeasurementComposable(activity: ComponentActivity) {
+fun FirstMeasurementComposable(activity: ComponentActivity, navController: NavHostController) {
 
     var hasStarted by remember { mutableStateOf(false) }
 
@@ -59,11 +61,16 @@ fun FirstMeasurementComposable(activity: ComponentActivity) {
 
 
             } else {
-                breathExerciseComposable(activity, 1) {
+                BreathExerciseComposable(activity, 1) {
                     activity.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit()
                         .putBoolean("isPersonsDefaultStateSaved", true).apply()
                     // reload app
-                    activity.recreate()
+                    // activity.recreate()
+                    navController.navigate(Pages.Home.route) {
+                        popUpTo(Pages.Home.route) {
+                            inclusive = true
+                        }
+                    }
                 }
             }
         }

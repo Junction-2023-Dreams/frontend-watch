@@ -11,4 +11,9 @@ sealed class Pages(
     object Pain : Pages("pain")
     object Relax : Pages("relax")
     object RelaxBreathing : Pages("relax_breathing")
+    object ExerciseBreath : Pages("exercise_breath")
+
+    object AssessmentStart : Pages("assessment_start")
+    object AssessmentPainLevel : Pages("assessment_pain_level")
+    object AssessmentPainQuestionaire : Pages("assessment_pain_questionaire")
 }

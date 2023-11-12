@@ -1,12 +1,14 @@
 package com.junction.watchfrontend.presentation.composables.navigation
 
-import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Text
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
@@ -14,6 +16,10 @@ import com.junction.watchfrontend.presentation.composables.home.FirstMeasurement
 import com.junction.watchfrontend.presentation.composables.home.HomeComposable
 import com.junction.watchfrontend.presentation.composables.home.PainComposable
 import com.junction.watchfrontend.presentation.composables.home.RelaxComposable
+import com.junction.watchfrontend.presentation.composables.home.assessment.PainLevelComposable
+import com.junction.watchfrontend.presentation.composables.home.assessment.PainQuestionaireComposable
+import com.junction.watchfrontend.presentation.composables.home.assessment.PsychologicalAssessmentComposable
+import com.junction.watchfrontend.presentation.composables.home.relax.BreathExerciseComposable
 
 @Composable
 fun NavigationComposable(activity: ComponentActivity) {
@@ -29,11 +35,11 @@ fun NavigationComposable(activity: ComponentActivity) {
 
     SwipeDismissableNavHost(
         navController = navController,
-        startDestination = startDestination,
+        startDestination = if(!isDebug) startDestination else Pages.ExerciseBreath.route,
 
         ) {
         composable(Pages.FirstMeasurement.route) {
-            FirstMeasurementComposable(activity);
+            FirstMeasurementComposable(activity, navController);
         }
         composable(Pages.Home.route) {
             HomeComposable(activity, isDebug, navController);
@@ -42,14 +48,40 @@ fun NavigationComposable(activity: ComponentActivity) {
             PainComposable(activity, isDebug, navController)
         }
         composable(Pages.Relax.route) {
-            RelaxComposable(activity, isDebug, false) {
-                navController.navigateUp()
-            }
+            RelaxComposable(activity, isDebug, false, navController)
         }
         composable(Pages.RelaxBreathing.route) {
-            RelaxComposable(activity, isDebug, true) {
-                navController.navigateUp()
+            RelaxComposable(activity, isDebug, true, navController)
+        }
+        composable(Pages.ExerciseBreath.route) {
+            BreathExerciseComposable(
+                activity,
+                iterations = 1,
+                titleFinished = {
+                    Text("Success!")
+                    Text("Your heart rate is now")
+                    Row {
+                        Text("85", color = MaterialTheme.colors.primary)
+                        Text(" bpm")
+                    }
+                }
+            ) {
+                navController.navigate(Pages.AssessmentStart.route) {
+                    popUpTo(Pages.Home.route) {
+                        inclusive = true
+                    }
+                }
             }
+        }
+
+        composable(Pages.AssessmentStart.route) {
+            PsychologicalAssessmentComposable(navController)
+        }
+        composable(Pages.AssessmentPainLevel.route) {
+            PainLevelComposable(navController)
+        }
+        composable(Pages.AssessmentPainQuestionaire.route) {
+            PainQuestionaireComposable(navController)
         }
     }
 }

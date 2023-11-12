@@ -23,51 +23,58 @@ import com.junction.watchfrontend.presentation.composables.utils.DialogConfirmat
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 
 @Composable
-fun PainComposable(activity: ComponentActivity, isDebug: Boolean, navController: NavHostController) {
+fun PainComposable(
+    activity: ComponentActivity,
+    isDebug: Boolean,
+    navController: NavHostController
+) {
     var showSuggenstionDialog by remember { mutableStateOf(false) }
     var showPillConfirmation by remember { mutableStateOf(false) }
 
     ColumnComposable {
+        ButtonComposable("Relax", {
+            Icon(
+                painter = painterResource(id = R.drawable.outline_self_improvement_24),
+                contentDescription = "Check"
+            )
+        }) {
+            navController.navigate(Pages.Relax.route)
+        }
 
+        SpacerComposable()
 
-    ButtonComposable("Relax", {
-        Icon(
-            painter = painterResource(id = R.drawable.outline_self_improvement_24),
-            contentDescription = "Check"
-        )
-    }) {
-        navController.navigate(Pages.Relax.route)
-    }
+        ButtonComposable("Ibuprofen", {
+            Icon(
+                painter = painterResource(id = R.drawable.pill),
+                contentDescription = "Check",
+                modifier = Modifier
+                    .width(20.dp)
+                    .height(20.dp)
+            )
+        }) {
+            showSuggenstionDialog = true
+        }
 
-    SpacerComposable()
+        DialogComposable(activity, showSuggenstionDialog, onDismiss = {
+            Handler().postDelayed({
+                showPillConfirmation = true
+            }, 500)
 
-    ButtonComposable("Ibuprofen", {
-        Icon(
-            painter = painterResource(id = R.drawable.pill),
-            contentDescription = "Check",
-            modifier = Modifier
-                .width(20.dp)
-                .height(20.dp)
-        )
-    }) {
-        showSuggenstionDialog = true
-    }
+            showSuggenstionDialog = false
+        }, onAccept = {
+            showPillConfirmation = false
+            showSuggenstionDialog = false
 
-    DialogComposable(activity, showSuggenstionDialog, onDismiss = {
-        Handler().postDelayed({
-            showPillConfirmation = true
-        }, 500)
-        showSuggenstionDialog = false
-    }, onAccept = {
-        showPillConfirmation = false
-        showSuggenstionDialog = false
+            navController.navigate(Pages.RelaxBreathing.route)
+        })
 
-        navController.navigate(Pages.RelaxBreathing.route)
-    })
-
-    DialogConfirmationComposable(showPillConfirmation, onDismiss = {
-        navController.navigateUp()
-        showPillConfirmation = false
-    })
+        DialogConfirmationComposable(showPillConfirmation, onDismiss = {
+            showPillConfirmation = false
+            navController.navigate(Pages.Home.route) {
+                popUpTo(Pages.Home.route) {
+                    inclusive = true
+                }
+            }
+        })
     }
 }

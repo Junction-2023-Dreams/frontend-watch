@@ -64,7 +64,7 @@ fun HomeComposable(
                     .width(100.dp)
                     .height(Constants.buttonHeight)
             ) {
-                Text("I have pain")
+                Text("I feel pain")
             }
 
             SpacerComposable(32)
