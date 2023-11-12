@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.R
+import com.junction.watchfrontend.presentation.composables.utils.ButtonComposable
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
 import kotlinx.coroutines.delay
 
@@ -146,10 +147,8 @@ fun BreathExerciseComposable(
                 } else {
                     titleFinished()
                     Spacer(modifier = Modifier.height(6.dp))
-                    Button(onClick = {
+                    ButtonComposable("Finish") {
                         onFinish()
-                    }) {
-                        Text("Finish")
                     }
                 }
             }

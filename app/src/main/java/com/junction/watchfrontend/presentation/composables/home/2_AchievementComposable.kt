@@ -39,7 +39,6 @@ fun AchievementComposable(activity: ComponentActivity) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             item {
-
                 Text(
                     "Achievements",
                     style = androidx.compose.material3.MaterialTheme.typography.titleMedium
@@ -87,7 +86,7 @@ fun AchievementComposable(activity: ComponentActivity) {
                 TitleCard(
                     modifier = Modifier.width(200.dp),
                     onClick = {
-                        toast(activity, "")
+                        toast(activity, "Displayed on Phone")
                     },
                     title = { Text("Breathe II") },
                     time = { Text("2 P", color = MaterialTheme.colors.primary) },
@@ -104,7 +103,7 @@ fun AchievementComposable(activity: ComponentActivity) {
                 TitleCard(
                     modifier = Modifier.width(200.dp),
                     onClick = {
-                        toast(activity)
+                        toast(activity, "Displayed on Phone")
                     },
                     title = { Text("Yoga") },
                     time = { Text("5 P", color = MaterialTheme.colors.primary) },
@@ -120,11 +119,7 @@ fun AchievementComposable(activity: ComponentActivity) {
                     modifier = Modifier.width(200.dp),
                     onClick = {
 
-                        Toast.makeText(
-                            activity,
-                            "Opened on mobile phone",
-                            Toast.LENGTH_SHORT,
-                        ).show()
+                        toast(activity, "Displayed on Phone")
                     },
                     title = { Text("Meet I") },
                     time = { Text("15 P", color = MaterialTheme.colors.primary) },
@@ -141,7 +136,7 @@ fun AchievementComposable(activity: ComponentActivity) {
                 TitleCard(
                     modifier = Modifier.width(200.dp),
                     onClick = {
-                        toast(activity)
+                        toast(activity, "Displayed on Phone")
                     },
                     title = { Text("Breath I") },
                     time = { Text("1 P", color = MaterialTheme.colors.primary) },

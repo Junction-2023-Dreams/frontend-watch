@@ -20,6 +20,7 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TitleCard
 import com.junction.watchfrontend.presentation.composables.navigation.Pages
 import com.junction.watchfrontend.presentation.composables.utils.ButtonComposable
+import com.junction.watchfrontend.presentation.composables.utils.DialogConfirmationComposable
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 
 @Composable
@@ -27,6 +28,8 @@ fun PainQuestionaireComposable(navController: NavHostController) {
     var checkboxState by remember { mutableStateOf(false) }
     var checkboxState2 by remember { mutableStateOf(false) }
     var checkboxState3 by remember { mutableStateOf(false) }
+
+    var showDialog by remember { mutableStateOf(false) }
 
     ScalingLazyColumn(
         modifier = Modifier
@@ -114,8 +117,16 @@ fun PainQuestionaireComposable(navController: NavHostController) {
 
         item {
             ButtonComposable("Complete") {
+                showDialog = true
+            }
+        }
+        item {
+            DialogConfirmationComposable(
+                showDialog,
+                "Completed",
+                "Psychological Health assessment analyzed"
+            ) {
                 navController.navigate(Pages.Home.route) {
-
                     popUpTo(Pages.Home.route) { inclusive = true }
                 }
             }
