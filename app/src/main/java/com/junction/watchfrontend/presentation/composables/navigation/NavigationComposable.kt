@@ -33,7 +33,7 @@ fun NavigationComposable(activity: ComponentActivity) {
     var startDestination =
         if (hasFirstMeasurement) Pages.Home.route else Pages.FirstMeasurement.route
 
-    var isDebug by remember { mutableStateOf(true) };
+    var isDebug by remember { mutableStateOf(false) };
 
     SwipeDismissableNavHost(
         navController = navController,

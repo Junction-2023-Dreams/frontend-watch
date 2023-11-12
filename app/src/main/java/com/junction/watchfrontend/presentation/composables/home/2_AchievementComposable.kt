@@ -42,8 +42,11 @@ fun AchievementComposable(activity: ComponentActivity) {
 
                 Text(
                     "Achievements",
-                    style = androidx.compose.material3.MaterialTheme.typography.titleSmall
+                    style = androidx.compose.material3.MaterialTheme.typography.titleMedium
                 )
+            }
+            item{
+                SpacerComposable()
             }
             item {
                 Row {
@@ -60,6 +63,11 @@ fun AchievementComposable(activity: ComponentActivity) {
                             color = MaterialTheme.colors.primary
                         )
                     )
+
+                    Text(
+                        " of 100 Points",
+                        style = androidx.compose.material3.MaterialTheme.typography.titleSmall
+                    )
                 }
             }
 
@@ -72,7 +80,7 @@ fun AchievementComposable(activity: ComponentActivity) {
             }
 
             item {
-                SpacerComposable()
+                SpacerComposable(16)
             }
             item {
 
