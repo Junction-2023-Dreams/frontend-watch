@@ -12,6 +12,7 @@ import androidx.wear.compose.material.Text
 import androidx.wear.compose.navigation.SwipeDismissableNavHost
 import androidx.wear.compose.navigation.composable
 import androidx.wear.compose.navigation.rememberSwipeDismissableNavController
+import com.junction.watchfrontend.presentation.composables.home.AchievementComposable
 import com.junction.watchfrontend.presentation.composables.home.ChartComposable
 import com.junction.watchfrontend.presentation.composables.home.FirstMeasurementComposable
 import com.junction.watchfrontend.presentation.composables.home.HomeComposable
@@ -32,11 +33,11 @@ fun NavigationComposable(activity: ComponentActivity) {
     var startDestination =
         if (hasFirstMeasurement) Pages.Home.route else Pages.FirstMeasurement.route
 
-    var isDebug by remember { mutableStateOf(false) };
+    var isDebug by remember { mutableStateOf(true) };
 
     SwipeDismissableNavHost(
         navController = navController,
-        startDestination = if(!isDebug) startDestination else Pages.Chart.route,
+        startDestination = if(!isDebug) startDestination else Pages.Achievements.route,
 
         ) {
         composable(Pages.FirstMeasurement.route) {
@@ -86,6 +87,9 @@ fun NavigationComposable(activity: ComponentActivity) {
         }
         composable(Pages.Chart.route) {
             ChartComposable()
+        }
+        composable(Pages.Achievements.route) {
+            AchievementComposable(activity)
         }
     }
 }

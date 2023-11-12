@@ -4,14 +4,9 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,12 +16,10 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TitleCard
-import com.junction.watchfrontend.presentation.composables.home.assessment.PsychologicalAssessmentComposable
-import com.junction.watchfrontend.presentation.composables.home.relax.BreathExerciseComposable
 import com.junction.watchfrontend.presentation.composables.navigation.Pages
 import com.junction.watchfrontend.presentation.composables.utils.ColumnComposable
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
-import com.junction.watchfrontend.presentation.composables.utils.toastNotImplemented
+import com.junction.watchfrontend.presentation.composables.utils.toast
 
 @Composable
 fun RelaxComposable(
@@ -71,7 +64,7 @@ fun RelaxComposable(
                 TitleCard(
                     modifier = Modifier.width(200.dp),
                     onClick = {
-                        toastNotImplemented(activity)
+                        toast(activity)
                     },
                     title = { Text("Walking") },
                     time = { Text("5 min", color = MaterialTheme.colors.primary) },
@@ -86,7 +79,7 @@ fun RelaxComposable(
                 TitleCard(
                     modifier = Modifier.width(200.dp),
                     onClick = {
-                        toastNotImplemented(activity)
+                        toast(activity)
                     },
                     title = { Text("Meditation") },
                     time = { Text("7 min", color = MaterialTheme.colors.primary) },

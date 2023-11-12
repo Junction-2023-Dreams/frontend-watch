@@ -18,4 +18,5 @@ sealed class Pages(
     object AssessmentPainQuestionaire : Pages("assessment_pain_questionaire")
 
     object Chart : Pages("chart")
+    object Achievements : Pages("achievements")
 }

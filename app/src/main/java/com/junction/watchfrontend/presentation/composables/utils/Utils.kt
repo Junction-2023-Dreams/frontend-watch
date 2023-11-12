@@ -19,8 +19,12 @@ import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
-
-fun toastNotImplemented(activity: ComponentActivity) =  Toast.makeText(
+fun toast(activity: ComponentActivity, text: String) =  Toast.makeText(
+    activity,
+    text ,
+    Toast.LENGTH_SHORT,
+).show();
+fun toast(activity: ComponentActivity) =  Toast.makeText(
     activity,
     "Implemented soon",
     Toast.LENGTH_SHORT,
