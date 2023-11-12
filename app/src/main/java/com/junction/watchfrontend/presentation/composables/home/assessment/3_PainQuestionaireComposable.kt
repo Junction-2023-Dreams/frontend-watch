@@ -124,7 +124,7 @@ fun PainQuestionaireComposable(navController: NavHostController) {
             DialogConfirmationComposable(
                 showDialog,
                 "Completed",
-                "Psychological Health assessment analyzed"
+                "Psychological health assessment absolved and analyzed data."
             ) {
                 navController.navigate(Pages.Home.route) {
                     popUpTo(Pages.Home.route) { inclusive = true }

@@ -14,6 +14,7 @@ import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.R
 import com.junction.watchfrontend.presentation.composables.navigation.Pages
+import com.junction.watchfrontend.presentation.composables.utils.ButtonComposable
 import com.junction.watchfrontend.presentation.composables.utils.ColumnComposable
 import com.junction.watchfrontend.presentation.composables.utils.SpacerComposable
 import com.junction.watchfrontend.presentation.composables.utils.Constants
@@ -35,25 +36,13 @@ fun PsychologicalAssessmentComposable(
 
         SpacerComposable(12)
 
-        Button(
-            onClick = {
-                navController.navigate(Pages.AssessmentPainLevel.route)
-            },
-            modifier = Modifier
-                .height(Constants.buttonHeight)
-                .width(100.dp)
-        ) {
-            Row {
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_play_arrow_24),
-                    contentDescription = "Check"
-                )
-                SpacerComposable()
-                Text("Start")
-            }
+        ButtonComposable("Start", {
+            Icon(
+                painter = painterResource(id = R.drawable.baseline_play_arrow_24),
+                contentDescription = "Check"
+            )
+        }) {
+            navController.navigate(Pages.AssessmentPainLevel.route)
         }
-
     }
-
-
 }

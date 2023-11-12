@@ -93,7 +93,6 @@ fun RelaxComposable(
                 TitleCard(
                     modifier = Modifier.width(200.dp),
                     onClick = {
-
                         Toast.makeText(
                             activity,
                             "Opened on mobile phone",

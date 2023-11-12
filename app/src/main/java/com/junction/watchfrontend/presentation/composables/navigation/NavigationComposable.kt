@@ -28,6 +28,7 @@ fun NavigationComposable(activity: ComponentActivity) {
     val navController = rememberSwipeDismissableNavController()
 
     var sharedPreferences = activity.getSharedPreferences("prefs", ComponentActivity.MODE_PRIVATE);
+
     var hasFirstMeasurement = sharedPreferences.getBoolean("isPersonsDefaultStateSaved", false)
 
     var startDestination =
@@ -37,7 +38,7 @@ fun NavigationComposable(activity: ComponentActivity) {
 
     SwipeDismissableNavHost(
         navController = navController,
-        startDestination = if(!isDebug) startDestination else Pages.Achievements.route,
+        startDestination = if (!isDebug) startDestination else Pages.Achievements.route,
 
         ) {
         composable(Pages.FirstMeasurement.route) {
@@ -53,7 +54,17 @@ fun NavigationComposable(activity: ComponentActivity) {
             RelaxComposable(activity, isDebug, false, navController)
         }
         composable(Pages.RelaxBreathing.route) {
-            RelaxComposable(activity, isDebug, true, navController)
+            // RelaxComposable(activity, isDebug, true, navController)
+            BreathExerciseComposable(activity, 1, {
+                Text("Finished breathing\nexercise.\nHealth data analyzed\n",
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+            }) {
+                navController.navigate(Pages.Home.route) {
+                    popUpTo(Pages.Home.route) {
+                        inclusive = true
+                    }
+                }
+            }
         }
         composable(Pages.ExerciseBreath.route) {
             BreathExerciseComposable(

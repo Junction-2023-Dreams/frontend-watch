@@ -19,12 +19,14 @@ import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import com.junction.watchfrontend.presentation.theme.MyApplicationTheme
-fun toast(activity: ComponentActivity, text: String) =  Toast.makeText(
+
+fun toast(activity: ComponentActivity, text: String) = Toast.makeText(
     activity,
-    text ,
+    text,
     Toast.LENGTH_SHORT,
 ).show();
-fun toast(activity: ComponentActivity) =  Toast.makeText(
+
+fun toast(activity: ComponentActivity) = Toast.makeText(
     activity,
     "Implemented soon",
     Toast.LENGTH_SHORT,
@@ -54,15 +56,22 @@ fun SpacerComposable(height: Int = 8, width: Int = 8) =
     )
 
 @Composable
-fun ButtonComposable(text: String = "Click me", icon: @Composable() (RowScope.() -> Unit)? = null, onClick: () -> Unit) {
+fun ButtonComposable(
+    text: String = "Click me",
+    icon: @Composable() (RowScope.() -> Unit)? = null,
+    onClick: () -> Unit
+) {
     Button(
         onClick = onClick,
         modifier = Modifier
             .height(Constants.buttonHeight)
             .width(108.dp)
     ) {
-        Row {
-            if(icon != null) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (icon != null) {
                 icon()
                 SpacerComposable()
             }
